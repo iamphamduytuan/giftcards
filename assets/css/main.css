@@ -1,0 +1,301 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --color-bg: #f4f6f8;
+  --color-surface: #ffffff;
+  --color-border: #e3e7ec;
+  --color-text: #1f2933;
+  --color-muted: #6b7785;
+  --color-primary: #10b981;
+  --color-primary-dark: #0c9468;
+  --color-primary-soft: #e6f8f1;
+  --color-danger: #dc2626;
+  --color-danger-soft: #fdecec;
+  --color-inactive-soft: #eef0f3;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --container-width: 1200px;
+  --focus-ring: 0 0 0 3px rgba(16, 185, 129, 0.35);
+  --color-border-strong: #c5ccd5;
+  --color-placeholder: #9aa5b1;
+  --color-primary-hover: #0c9468;
+  --status-active-bg: #e8f8ef;
+  --status-active-border: #c3ecd5;
+  --status-active-text: #15803d;
+  --status-active-halo: rgba(21, 128, 61, 0.18);
+  color-scheme: light;
+}
+
+/* ---------- Dark theme: only the tokens change, components stay the same ---------- */
+:root[data-theme='dark'] {
+  --color-bg: #0f1419;
+  --color-surface: #182029;
+  --color-border: #2a3541;
+  --color-text: #e8edf2;
+  --color-muted: #93a1b0;
+  --color-primary: #10b981;
+  --color-primary-dark: #34d399;
+  --color-primary-soft: rgba(16, 185, 129, 0.16);
+  --color-primary-hover: #0c9468;
+  --color-danger: #f87171;
+  --color-danger-soft: rgba(248, 113, 113, 0.12);
+  --color-inactive-soft: #222c37;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --color-border-strong: #3a4857;
+  --color-placeholder: #6b7a89;
+  --status-active-bg: rgba(52, 211, 153, 0.14);
+  --status-active-border: rgba(52, 211, 153, 0.32);
+  --status-active-text: #34d399;
+  --status-active-halo: rgba(52, 211, 153, 0.22);
+  color-scheme: dark;
+}
+
+body {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ---------- Shared layout helpers ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+}
+
+.panel__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.panel__title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: var(--color-primary);
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(16, 185, 129, 0.35);
+  color: #fff;
+  font-size: 20px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 20px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+}
+
+/* ---------- Form controls (shared by every form component) ---------- */
+.input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+textarea.input {
+  padding: 10px 12px;
+  min-height: 96px;
+  resize: vertical;
+}
+
+.input::placeholder {
+  color: var(--color-placeholder);
+}
+
+.input:hover {
+  border-color: var(--color-border-strong);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--focus-ring);
+}
+
+.input[aria-invalid='true'] {
+  border-color: var(--color-danger);
+  background: var(--color-danger-soft);
+}
+
+/* Input with a fixed prefix (+65, $). The group owns the border, the error color
+   and the focus ring so the prefix and the input always look like one control. */
+.input-group {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.input-group:hover {
+  border-color: var(--color-border-strong);
+}
+
+.input-group:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: var(--focus-ring);
+}
+
+.input-group__prefix {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--color-bg);
+  border-right: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-weight: 600;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* The input inside the group has no border or ring of its own */
+.input-group .input,
+.input-group .input:hover,
+.input-group .input:focus,
+.input-group .input[aria-invalid='true'] {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.input-group.is-invalid {
+  background: var(--color-danger-soft);
+  border-color: var(--color-danger);
+}
+
+.input-group.is-invalid .input-group__prefix {
+  background: rgba(220, 38, 38, 0.08);
+  border-right-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.input-group.is-invalid:focus-within {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.25);
+}
