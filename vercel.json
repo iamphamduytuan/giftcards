@@ -1,0 +1,12 @@
+{
+  "framework": null,
+  "buildCommand": "npm run build:vercel",
+  "outputDirectory": "public",
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "{.nuxt/**,node_modules/node-fetch-native/**}",
+      "maxDuration": 10
+    }
+  }
+}

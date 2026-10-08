@@ -33,5 +33,8 @@ export default {
   // Auto register every component in ~/components without a folder prefix
   components: [{ path: '~/components', pathPrefix: false }],
 
-  build: {}
+  build: {
+    // Bundle the server dependencies so the serverless function does not need node_modules
+    standalone: true
+  }
 }
